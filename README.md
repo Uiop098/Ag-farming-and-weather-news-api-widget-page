@@ -1,53 +1,52 @@
-# Farming Information Technology (AgTech) Web Application
+# 🌾 AgTech OS — Smart Farming, Weather & News Dashboard
 
-A responsive, modular, and secure web interface for managing agricultural technology, smart machinery, fertilizer scheduling, weather insights, and dynamic farming news.
+A modular, full-stack Agricultural Information Technology Dashboard integrating real-time weather analytics, live agricultural news feeds, smart machinery tracking, fertilizer scheduling, and an AI assistant.
 
----
-
-## Features
-- **Top Bar**: Search farm location, display dynamic weather quick-widget, and user auth modal.
-- **Collapsible Sidebar**: Seamless navigation between functional tabs.
-- **Dynamic Tabs**:
-  - **Overview**: Key technology breakdowns with CSS hover effects.
-  - **Machinery & Tools**: Drone and sensor technical skill metrics.
-  - **Fertilizers & Soil**: Algorithm-based application insights.
-  - **Weather & Climate**: Geolocation and API-integrated weather metrics.
-  - **Quick Chat**: Dynamic AI assistant inspired by UB Dashboard.
-  - **Management**: Profit/loss estimation & labor tracking.
-- **Bottom Functional Bar**: Real-time news ticker with AgTech news.
-- **Secure Backend**: PHP registration handler powered by PDO, input validation, and Argon2id password hashing.
+![Stack](https://img.shields.io/badge/Stack-PHP%20%7C%20MySQL%20%7C%20Vanilla%20JS-blue)
+![API](https://img.shields.io/badge/API-OpenWeather%20%7C%20NewsAPI-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
-## Installation & Setup Instructions
+## 🚜 System Modules
 
-### 1. Database Setup (MySQL)
-Run the following SQL in your MySQL database (e.g., via phpMyAdmin):
+- **🌤️ Weather & Climate Widget:** Live geolocation weather metrics (temperature, humidity, precipitation, wind speed, UV index) with OpenWeatherMap API integration.
+- **📰 Farming News Feed:** Real-time curated agricultural industry news, crop market trends, and policy updates.
+- **🚜 Smart Machinery & IoT Tools:** Equipment status monitoring, drone telemetry, and sensor battery/health tracking.
+- **🧪 Fertilizer & Soil Insights:** Data-driven crop application recommendations and soil nutrient balance calculators.
+- **🤖 Quick Assistant:** Interactive agricultural assistant for instant farming guidance.
+- **🔐 User Management:** Secure PHP & MySQL authentication with registration and session handling.
 
-```sql
-CREATE DATABASE IF NOT EXISTS farming_tech_db;
-USE farming_tech_db;
+---
 
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+## 🛠️ Installation & Setup
+
+### Prerequisites
+- PHP 8.0+
+- MySQL 5.7+ / MariaDB
+- Apache / Nginx or PHP Built-in Server
+
+### Database Configuration
+1. Import `database_setup.sql` into your MySQL server:
+   ```bash
+   mysql -u root -p < database_setup.sql
+   ```
+2. Update database credentials in `config.php`:
+   ```php
+   define('DB_HOST', 'localhost');
+   define('DB_USER', 'your_user');
+   define('DB_PASS', 'your_password');
+   define('DB_NAME', 'agtech_db');
+   ```
+
+### Running the Application
+```bash
+php -S localhost:8000
 ```
+Open `http://localhost:8000` in your web browser.
 
-### 2. Configure Credentials (`config.php`)
-Open `config.php` and update your database credentials and optional API keys:
-- `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME`
-- `WEATHER_API_KEY`: Get a free key from [OpenWeatherMap](https://openweathermap.org/api).
-- `NEWS_API_KEY`: Get a free key from [NewsAPI](https://newsapi.org/).
+---
 
-*(Note: If no API keys are entered, the system automatically runs in high-quality fallback demo mode!)*
+## 📜 License
 
-## Security Implementation
-1. **SQL Injection Prevention**: Uses PDO Prepared Statements with emulation disabled.
-2. **Password Security**: Stores passwords using modern `PASSWORD_ARGON2ID` hashing algorithms.
-3. **API Key Isolation**: External API requests are proxied via `api.php` so secret keys are never exposed in client JavaScript code.
-4. **XSS Protection**: Inputs are sanitized with `FILTER_SANITIZE_SPECIAL_CHARS` and HTML escaping.
-5. **Security Headers**: Includes `X-Frame-Options`, `X-Content-Type-Options`, and `X-XSS-Protection` headers.
+MIT License. Maintained by **Uiop098**.
